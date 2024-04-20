@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-const alphabet = '13456789abcdefghijkmnopqrstuwxyz'
+const alphabet: string = '13456789abcdefghijkmnopqrstuwxyz'
 
 /**
  * Encode provided Uint8Array using the Nano-specific Base-32 implementeation.
@@ -30,16 +30,16 @@ const alphabet = '13456789abcdefghijkmnopqrstuwxyz'
  * @returns
  * @hidden
  */
-export function encodeNanoBase32(view) {
-  const length = view.length
-  const leftover = (length * 8) % 5
-  const offset = leftover === 0 ? 0 : 5 - leftover
+export function encodeNanoBase32(view: Uint8Array): string {
+  const length: number = view.length
+  const leftover: number = (length * 8) % 5
+  const offset: number = leftover === 0 ? 0 : 5 - leftover
 
-  let value = 0
-  let output = ''
-  let bits = 0
+  let value: number = 0
+  let output: string = ''
+  let bits: number = 0
 
-  for (let i = 0; i < length; i++) {
+  for (let i: number = 0; i < length; i++) {
     value = (value << 8) | view[i]
     bits += 8
 
@@ -56,8 +56,8 @@ export function encodeNanoBase32(view) {
   return output
 }
 
-function readChar(char) {
-  const idx = alphabet.indexOf(char)
+function readChar(char: string): number {
+  const idx: number = alphabet.indexOf(char)
 
   if (idx === -1) {
     throw new Error(`Invalid character found: ${char}`)
@@ -72,18 +72,18 @@ function readChar(char) {
  * @returns
  * @hidden
  */
-export function decodeNanoBase32(input) {
-  const length = input.length
-  const leftover = (length * 5) % 8
-  const offset = leftover === 0 ? 0 : 8 - leftover
+export function decodeNanoBase32(input: string): Uint8Array {
+  const length: number = input.length
+  const leftover: number = (length * 5) % 8
+  const offset: number = leftover === 0 ? 0 : 8 - leftover
 
-  let bits = 0
-  let value = 0
+  let bits: number = 0
+  let value: number = 0
 
-  let index = 0
-  let output = new Uint8Array(Math.ceil((length * 5) / 8))
+  let index: number = 0
+  let output: Uint8Array = new Uint8Array(Math.ceil((length * 5) / 8))
 
-  for (let i = 0; i < length; i++) {
+  for (let i: number = 0; i < length; i++) {
     value = (value << 5) | readChar(input[i])
     bits += 5
 

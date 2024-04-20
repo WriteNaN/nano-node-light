@@ -1,25 +1,26 @@
-export const MAGIC_NUMBER = 'R'.charCodeAt(0)
+export const MAGIC_NUMBER: number = 'R'.charCodeAt(0);
 
-export const SELF_ADDRESS = Buffer.alloc(16, 0)
+export const SELF_ADDRESS: Buffer = Buffer.alloc(16, 0);
 
-export const MESSAGE_TYPE = {
-  INVALID: 0x00,
-  NAT: 0x01,
-  KEEPALIVE: 0x02,
-  PUBLISH: 0x03,
-  CONFIRM_REQ: 0x04,
-  CONFIRM_ACK: 0x05,
-  BULK_PULL: 0x06,
-  FRONTIER_REQ: 0x08,
-  NODE_ID_HANDSHAKE: 0x0a,
-  BULK_PULL_ACCOUNT: 0x0b,
-  TELEMETRY_REQ: 0x0c,
-  TELEMETRY_ACK: 0x0d,
-  ASC_PULL_REQ: 0x0e,
-  ASC_PULL_ACK: 0x0f,
-  PROTOCOL_UPGRADE: 0x1f
+export enum MESSAGE_TYPE {
+  INVALID = 0x00,
+  NAT = 0x01,
+  KEEPALIVE = 0x02,
+  PUBLISH = 0x03,
+  CONFIRM_REQ = 0x04,
+  CONFIRM_ACK = 0x05,
+  BULK_PULL = 0x06,
+  FRONTIER_REQ = 0x08,
+  NODE_ID_HANDSHAKE = 0x0a,
+  BULK_PULL_ACCOUNT = 0x0b,
+  TELEMETRY_REQ = 0x0c,
+  TELEMETRY_ACK = 0x0d,
+  ASC_PULL_REQ = 0x0e,
+  ASC_PULL_ACK = 0x0f,
+  PROTOCOL_UPGRADE = 0x1f
 }
-export const MESSAGE_TYPE_NAME = {
+
+export const MESSAGE_TYPE_NAME: { [key in MESSAGE_TYPE]: string } = {
   [MESSAGE_TYPE.INVALID]: 'Invalid',
   [MESSAGE_TYPE.NAT]: 'NaT',
   [MESSAGE_TYPE.KEEPALIVE]: 'KeepAlive',
@@ -35,9 +36,16 @@ export const MESSAGE_TYPE_NAME = {
   [MESSAGE_TYPE.ASC_PULL_REQ]: 'AscPullReq',
   [MESSAGE_TYPE.ASC_PULL_ACK]: 'AscPullAck',
   [MESSAGE_TYPE.PROTOCOL_UPGRADE]: 'ProtocolUpgrade'
+};
+
+export interface Network {
+  ID: number;
+  ADDRESS: string;
+  PORT: number;
+  TELEMETRY_CACHE_CUTOFF: number;
 }
 
-export const NETWORK = {
+export const NETWORK: { [key: string]: Network } = {
   LIVE: {
     ID: 'C'.charCodeAt(0),
     ADDRESS: 'peering.nano.org',
@@ -56,4 +64,4 @@ export const NETWORK = {
     PORT: 17075,
     TELEMETRY_CACHE_CUTOFF: 6e10 // 60 seconds
   }
-}
+};

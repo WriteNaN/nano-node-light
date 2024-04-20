@@ -2,37 +2,36 @@
   "name": "nano-node-light",
   "version": "0.0.1",
   "type": "module",
-  "main": "lib/nano-node.js",
-  "imports": {
-    "#common": "./common/index.js",
-    "#common/*": "./common/*",
-    "#lib/*": "./lib/*",
-    "#test/*": "./test/*"
-  },
+  "main": "src/nano-node.ts",
   "scripts": {
-    "lint": "eslint . --ext js,mjs",
-    "prettier": "prettier --write .",
-    "test": "NODE_ENV=test TEST=all mocha --exit"
+    "start": "bun transpile || node ./bin/node.js",
+    "transpile": "tsc ./example/node.ts --outFile ./bin/node.js"
   },
   "dependencies": {
     "@trashman/ed25519-blake2b": "^0.0.3",
-    "debug": "^4.3.4",
-    "ip6addr": "^0.2.5",
-    "yargs": "^17.4.0"
+    "ed25519": "^0.0.5",
+    "ip6addr": "^0.2.5"
   },
   "devDependencies": {
-    "@babel/core": "^7.17.9",
-    "@babel/eslint-parser": "^7.17.0",
-    "chai": "^4.3.6",
-    "chai-bytes": "^0.1.2",
-    "eslint": "^8.12.0",
+    "@babel/core": "^7.24.4",
+    "@babel/eslint-parser": "^7.24.1",
+    "@types/bun": "^1.1.0",
+    "@types/debug": "^4.1.12",
+    "@types/ed25519": "^0.0.3",
+    "@types/ip6addr": "^0.2.6",
+    "@types/node": "^20.12.7",
+    "eslint": "^8.57.0",
     "eslint-config-standard": "^16.0.3",
-    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-promise": "^6.1.1",
     "mocha": "^9.2.2",
-    "prettier": "^2.6.2"
+    "prettier": "^2.8.8",
+    "ts-node": "^10.9.2"
   },
-  "packageManager": "yarn@3.2.0",
-  "license": "GPL-3.0"
+  "license": "GPL-3.0",
+  "trustedDependencies": [
+    "@trashman/ed25519-blake2b",
+    "ed25519"
+  ]
 }
